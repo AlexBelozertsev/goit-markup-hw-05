@@ -15,6 +15,7 @@
 /* цвет тени кнопки - 0px 4px 4px rgba(0, 0, 0, 0.15) */
 /* цвет тени ховерной карточки - 1px 4px 6px rgba(0, 0, 0, 0.16), 0px 4px 4px rgba(0, 0, 0, 0.06), 0px 1px 1px rgba(0, 0, 0, 0.12) */
 /* цвет тени карточки - 0px 2px 1px rgba(0, 0, 0, 0.2), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 1px 3px rgba(0, 0, 0, 0.12) */
+/* цвет бордера хедера - #ececec */
 /* цвет бордера - #AFB1B8 */
 /* цвет бордера в инпуте - rgba(255, 255, 255, 0.3) */
 
@@ -48,8 +49,12 @@
   --nav-item-shadow-hover: 0px 2px 2px rgba(0, 0, 0, 0.12),
     0px 1px 2px rgba(0, 0, 0, 0.08), 0px 3px 1px rgba(0, 0, 0, 0.1);
 
+  --border-header-color: #ececec;
   --border-color: #afb1b8;
   --border-input-color: rgba(255, 255, 255, 0.3);
+
+  --time-tranforming: 250ms;
+  --form-transforming: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body {
@@ -111,6 +116,7 @@ a {
 .container.main {
   display: flex;
   align-items: center;
+  border-bottom: 1px solid var(--border-header-color);
 }
 
 /*logo*/
@@ -152,6 +158,20 @@ nav .list {
   font-size: 14px;
   line-height: 1.14;
   letter-spacing: 0.02em;
+
+  transition: color var(--time-tranforming) var(--form-transforming);
+}
+.nav-link.current {
+  position: relative;
+}
+.nav-link.current > .row::after {
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 4px;
+  bottom: 0;
+  background-color: var(--accent-text-color);
+  border-radius: 2px;
 }
 
 /*Contact links*/
@@ -190,7 +210,7 @@ nav .list {
       var(--first-background-color),
       var(--first-background-color)
     ),
-    url("../images/Header.jpg");
+    url('../images/Header.jpg');
 }
 
 .hero-title {
@@ -272,10 +292,16 @@ nav .list {
   display: flex;
   justify-content: space-between;
 }
+.developments-item {
+  position: relative;
+}
 .developments img {
   display: block;
 }
 .developments-title {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
   padding: 27px 0;
 
   color: var(--third-color);
@@ -349,6 +375,9 @@ nav .list {
   color: var(--icon-color);
 
   border-radius: 50%;
+
+  transition: color var(--time-tranforming) var(--form-transforming),
+    background-color var(--time-tranforming) var(--form-transforming);
 }
 .soсial-links a:hover,
 .soсial-links a:focus {
@@ -378,6 +407,9 @@ nav .list {
   color: var(--border-color);
   border: 1px solid var(--border-color);
   border-radius: 4px;
+
+  transition: color var(--time-tranforming) var(--form-transforming),
+    border var(--time-tranforming) var(--form-transforming);
 }
 .client-item:not(:last-child) {
   margin-right: 30px;
@@ -449,6 +481,8 @@ nav .list {
   border-radius: 50%;
 
   cursor: pointer;
+
+  transition: background-color var(--time-tranforming) var(--form-transforming);
 }
 .link-items > a:focus,
 .link-items > a:hover {
@@ -513,6 +547,10 @@ nav .list {
   min-width: 73px;
   min-height: 38px;
   box-shadow: none;
+
+  transition: color var(--time-tranforming) var(--form-transforming),
+    background-color var(--time-tranforming) var(--form-transforming),
+    box-shadow var(--time-tranforming) var(--form-transforming);
 }
 .button.menu:hover,
 .button.menu:focus {
@@ -550,6 +588,8 @@ nav .list {
 
   margin-right: 30px;
   margin-bottom: 30px;
+
+  transition: box-shadow var(--time-tranforming) var(--form-transforming);
 }
 .portfolio-card:nth-child(3n) {
   margin-right: 0;
@@ -584,11 +624,26 @@ nav .list {
 .portfolio-card .text {
   line-height: 1.9;
 }
+.card-img {
+  position: relative;
+  overflow: hidden;
+}
+.portfolio-card > a:hover .hover-text {
+  transform: translateY(0);
+}
 .hover-text {
-  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 370px;
+
   color: var(--third-color);
   background-color: var(--hover-card-color);
+
   font-size: 18px;
   line-height: 1.56;
   padding: 63px 24px;
+
+  transform: translateY(100%);
+  transition: transform var(--time-tranforming) var(--form-transforming);
 }
