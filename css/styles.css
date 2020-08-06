@@ -194,6 +194,10 @@ nav .list {
   fill: currentColor;
 }
 
+main {
+  transform: translateY(-1px);
+}
+
 /*hero*/
 .hero {
   display: flex;
